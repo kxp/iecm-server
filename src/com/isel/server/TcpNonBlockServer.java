@@ -1,15 +1,17 @@
 package com.isel.server;
 
-import java.net.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.nio.channels.ServerSocketChannel;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public final class TcpServer  implements IServer {
+public final class TcpNonBlockServer implements IServer {
 
     private int tcpPort;
     private boolean running = true;
 
-    public TcpServer(int serverPort){
+    public TcpNonBlockServer(int serverPort){
         this.tcpPort = serverPort;
     }
 
@@ -19,7 +21,11 @@ public final class TcpServer  implements IServer {
         ServerSocket tcpSocket;
         try {
             tcpSocket = new ServerSocket(tcpPort);
-            System.out.println("Tcp server is running on port:" + this.tcpPort);
+            ServerSocketChannel serverChannel = tcpSocket.getChannel();
+            //Sets the socket as a non blocking.
+            serverChannel.configureBlocking(false);
+
+            System.out.println("Tcp Non blocking server is running on port:" + this.tcpPort);
             //Listen to new connections
             Listener(tcpSocket);
             //Closes the connection
