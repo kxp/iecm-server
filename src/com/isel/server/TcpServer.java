@@ -60,15 +60,17 @@ public final class TcpServer  implements IServer {
         String convertedString;
         try {
             //Create the input and output buffers.
-            BufferedReader requestStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            //BufferedReader requestStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             DataOutputStream responseStream = new DataOutputStream(socket.getOutputStream());
+            DataInputStream inFromClient = new DataInputStream(socket.getInputStream());
 
             //reads the text and converts it to upper case.
-            sourceString = requestStream.readLine();
+            //sourceString = requestStream.readLine();
+            sourceString = inFromClient.readUTF();
             convertedString = sourceString.toUpperCase();// + 'n';
 
             System.out.println("Original:" + sourceString + "\nConverted:" + convertedString);
-            responseStream.writeBytes(convertedString);
+            responseStream.writeChars(convertedString);
         }
         catch (Exception excp){
             //let it be handle by the caller.
