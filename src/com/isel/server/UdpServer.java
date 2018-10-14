@@ -8,14 +8,12 @@ import java.util.concurrent.Executors;
 
 public class UdpServer implements IServer {
 
-
     private int udpPort;
     private boolean running = true;
 
     public UdpServer(int serverPort){
         this.udpPort = serverPort;
     }
-
 
     @Override
     public void Start() {
@@ -56,9 +54,9 @@ public class UdpServer implements IServer {
                 byte[] sendData = convertedString.getBytes();
 
                 //Get details from the client.
-                InetAddress IPAddress = receivePacket.getAddress();
+                InetAddress sourceIp = receivePacket.getAddress();
                 int port = receivePacket.getPort();
-                DatagramPacket sendPacket =  new DatagramPacket(sendData, sendData.length, IPAddress, port);
+                DatagramPacket sendPacket =  new DatagramPacket(sendData, sendData.length, sourceIp, port);
                 udpSocket.send(sendPacket);
 
             }while (convertedString.equals("STOP") == false && convertedString.equals("END") == false && running);
