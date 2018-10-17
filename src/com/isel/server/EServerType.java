@@ -5,5 +5,4 @@ public enum EServerType {
         TCP,
         TCPNONBLOCK,
         UDP,
-        MULTICAST;
 }
