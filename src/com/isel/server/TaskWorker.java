@@ -7,9 +7,12 @@ import java.net.Socket;
 public class TaskWorker implements Runnable{
 
     private Socket socket;
+    //it makes it simpler to stop the server
+    private IServer sourceServer;
 
-    public TaskWorker (Socket socket) {
+    public TaskWorker (Socket socket, IServer server) {
         this.socket = socket;
+        this.sourceServer = server;
     }
 
     @Override
@@ -39,12 +42,18 @@ public class TaskWorker implements Runnable{
                 System.out.println("Original:" + sourceString + "\nConverted:" + convertedString);
                 out.println(convertedString);
                 out.flush();
-            }while(convertedString.equals("STOP") && convertedString.equals("END"));
+            }while(convertedString.equals("STOP") == false && convertedString.equals("END") == false );
 
             //clears the resources
             out.close();
             inFromClient.close();
             this.socket.close();
+
+            //Closes the server
+            if("STOP".equals(convertedString) == true){
+                this.sourceServer.Stop();
+            }
+
         }
         catch (Exception excp){
             //Lets print the issue.Since we have one thread per used it can be dealt with

@@ -15,9 +15,9 @@ public class Main {
         BufferedReader br = new BufferedReader(isr);
         EServerType serverType = EServerType.NOTSPECIFIED;
 
-        if (args.length > 1) {
+        if (args.length >= 1) {
             try {
-                serverType = EServerType.valueOf(args[1].toUpperCase());
+                serverType = EServerType.valueOf(args[0].toUpperCase());
             } catch (Exception excp) {
                 excp.printStackTrace();
                 return;
