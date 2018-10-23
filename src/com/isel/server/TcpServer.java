@@ -39,7 +39,7 @@ public final class TcpServer  implements IServer {
             this.tcpSocket.close();
 
         }catch (Exception excp){
-            //We are closing, no need
+            //We are closing, no need to print the message
             //excp.printStackTrace();
         }
     }

@@ -23,7 +23,7 @@ public class Main {
                 return;
             }
         } else {
-            System.out.println("Select the server type by choosing one of the options: tcp, tcpnonblock, udp or multicast.");
+            System.out.println("Select the server type by choosing one of the options: tcp, tcpnonblock, udp.");
 
             try {
                 String line = br.readLine();

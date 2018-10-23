@@ -2,7 +2,7 @@ package com.isel.server;
 
 public class ServerFactory {
 
-    //I am gonna store all the ports here just for agregate the port defenitions.
+    //I am gonna store all the ports here just for aggregate the port definitions.
     private static int TcpPort = 11000;
     private static int UdpPort = 11001;
 
